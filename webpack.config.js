@@ -44,9 +44,9 @@ module.exports = (env) => {
 
         },
         remotes: {
-          "auth_app": "auth_app@http://localhost:3001/remoteEntry.js",
-          "product_app": "product_app@http://localhost:3002/remoteEntry.js",
-          "checkout_app": "checkout_app@http://localhost:3003/remoteEntry.js"
+          "auth_app": "auth_app@https://auth-app-two-sepia.vercel.app/remoteEntry.js",
+          "product_app": "product_app@https://product-app-beryl.vercel.app/remoteEntry.js",
+          "checkout_app": "checkout_app@https://checkout-app-lxfv.vercel.app/remoteEntry.js"
         },
         shared: {
           react: { singleton: true, eager: true, requiredVersion: '^18.0.0' },
