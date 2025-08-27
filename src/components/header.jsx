@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { IoIosArrowDown } from "react-icons/io";
-import { Link, useNavigate } from "react-router-dom";
-import CartDrawer from "./CartDrawer";  // 🔹 yeni drawer component
+import CartDrawer from "./CartDrawer";
 
 function Header({ token }) {
     const [isScrolled, setIsScrolled] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState(false);
-    const [isCartOpen, setIsCartOpen] = useState(false); // 🔹 sepet state
+    const [isCartOpen, setIsCartOpen] = useState(false);
     const dropdownRef = useRef(null);
-    const navigate = useNavigate();
     const loggedIn = !!token;
 
     useEffect(() => {
@@ -26,16 +25,19 @@ function Header({ token }) {
         };
     }, []);
 
-    const handleSignIn = () => navigate("/auth");
+    // 🔹 Auth-App domain yönlendirmesi
+    const handleSignIn = () => {
+        window.location.href = "https://auth-app-two-sepia.vercel.app/"; // Auth-app URL
+    };
+
     const handleLogout = () => {
         localStorage.removeItem("auth_token");
         window.dispatchEvent(new Event("storage"));
-        navigate("/");
+        window.location.reload(); // sayfayı yenileyip durumu sıfırla
     };
 
-    // 🔹 Checkout'a yönlendirme fonksiyonu
     const handleGoToCheckout = () => {
-        navigate("/checkout");
+        window.location.href = "/checkout"; // checkout host-app içinde kaldığı için navigate gerekmez
     };
 
     return (
@@ -46,7 +48,6 @@ function Header({ token }) {
                 </Link>
 
                 <div className="flex items-center space-x-4">
-                    {/* 🔹 Sepetim butonu */}
                     <button
                         onClick={() => setIsCartOpen(true)}
                         className="bg-red-600 px-4 py-1 rounded text-white hover:bg-red-700 transition duration-200"
@@ -104,7 +105,6 @@ function Header({ token }) {
                 </div>
             </div>
 
-            {/* 🔹 Drawer çağrımı - onGoToCheckout prop'u eklendi */}
             <CartDrawer
                 isOpen={isCartOpen}
                 onClose={() => setIsCartOpen(false)}

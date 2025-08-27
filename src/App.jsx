@@ -35,18 +35,18 @@ export default function App() {
   }, []);
 
   return (
-    <Provider store={store}>
-      <BrowserRouter>
-        <Header token={token} />
-        <main style={{ paddingTop: 90 }}>
-          <Suspense fallback={<div>Loading remote...</div>}>
-            <Routes>
-              <Route path="/" element={<ProductApp />} />
-              <Route path="/checkout" element={<CheckoutApp />} />
-            </Routes>
-          </Suspense>
-        </main>
-      </BrowserRouter>
-    </Provider>
+
+    <>
+      <Header token={token} />
+      <main style={{ paddingTop: 90 }}>
+        <Suspense fallback={<div>Loading remote...</div>}>
+          <Routes>
+            <Route path="/" element={<ProductApp />} />
+            <Route path="/checkout" element={<CheckoutApp />} />
+          </Routes>
+        </Suspense>
+      </main>
+    </>
+
   );
 }
