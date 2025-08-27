@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from 'react-redux';
 import { IoIosArrowDown } from "react-icons/io";
 import CartDrawer from "./CartDrawer";
 
@@ -10,6 +11,7 @@ function Header({ token }) {
     const dropdownRef = useRef(null);
     const loggedIn = !!token;
     const navigate = useNavigate();
+    const cart = useSelector((state) => state.cart);
 
     useEffect(() => {
         const handleScroll = () => setIsScrolled(window.scrollY > 60);
@@ -39,7 +41,8 @@ function Header({ token }) {
 
     const handleGoToCheckout = () => {
         setIsCartOpen(false);
-        navigate("/checkout");
+        const payload = encodeURIComponent(JSON.stringify(cart));
+        window.location.href = `http://localhost:3003/?cart=${payload}`; // prod'da checkout domain'inizi yazın
     };
 
     return (
