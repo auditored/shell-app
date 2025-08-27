@@ -4,13 +4,29 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store/store"; // Kendi store'unu import et
 import Header from "./components/header";
 
-const AuthApp = React.lazy(() => import("auth_app/AuthApp"));
 const ProductApp = React.lazy(() => import("product_app/ProductApp"));
 const CheckoutApp = React.lazy(() => import("checkout_app/CheckoutApp"));
 
-
 export default function App() {
   const [token, setToken] = useState(localStorage.getItem("auth_token") || null);
+  const navigate = useNavigate();
+
+  // URL'deki token'ı al ve localStorage'a kaydet
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const urlToken = params.get("token");
+
+    if (urlToken) {
+      localStorage.setItem("auth_token", urlToken);
+      setToken(urlToken);
+
+      // Query param'ı temizle
+      window.history.replaceState({}, document.title, "/");
+
+      // Ana sayfaya yönlendir
+      navigate("/");
+    }
+  }, [navigate]);
 
   useEffect(() => {
     const handler = () => setToken(localStorage.getItem("auth_token"));
@@ -26,22 +42,11 @@ export default function App() {
           <Suspense fallback={<div>Loading remote...</div>}>
             <Routes>
               <Route path="/" element={<ProductApp />} />
-              <Route path="/auth" element={<AuthApp />} />
               <Route path="/checkout" element={<CheckoutApp />} />
             </Routes>
           </Suspense>
         </main>
-
-        {token && <RedirectToHome />}
       </BrowserRouter>
     </Provider>
   );
-}
-
-function RedirectToHome() {
-  const navigate = useNavigate();
-  useEffect(() => {
-    navigate("/");
-  }, [navigate]);
-  return null;
 }
