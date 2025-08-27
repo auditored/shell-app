@@ -42,7 +42,7 @@ function Header({ token }) {
     const handleGoToCheckout = () => {
         setIsCartOpen(false);
         const payload = encodeURIComponent(JSON.stringify(cart));
-        window.location.href = `http://localhost:3003/?cart=${payload}`; // prod'da checkout domain'inizi yazın
+        window.location.href = `https://checkout-app-lxfv.vercel.app/?cart=${payload}`; // prod'da checkout domain'inizi yazın
     };
 
     return (
