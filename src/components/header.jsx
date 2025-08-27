@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IoIosArrowDown } from "react-icons/io";
 import CartDrawer from "./CartDrawer";
 
@@ -9,6 +9,7 @@ function Header({ token }) {
     const [isCartOpen, setIsCartOpen] = useState(false);
     const dropdownRef = useRef(null);
     const loggedIn = !!token;
+    const navigate = useNavigate();
 
     useEffect(() => {
         const handleScroll = () => setIsScrolled(window.scrollY > 60);
@@ -37,7 +38,8 @@ function Header({ token }) {
     };
 
     const handleGoToCheckout = () => {
-        window.location.href = "https://checkout-app-lxfv.vercel.app/"; // checkout host-app içinde kaldığı için navigate gerekmez
+        setIsCartOpen(false);
+        navigate("/checkout");
     };
 
     return (

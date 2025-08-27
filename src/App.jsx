@@ -42,6 +42,7 @@ export default function App() {
         <Suspense fallback={<div>Loading remote...</div>}>
           <Routes>
             <Route path="/" element={<ProductApp />} />
+            <Route path="/checkout" element={<CheckoutApp />} />
           </Routes>
         </Suspense>
       </main>
