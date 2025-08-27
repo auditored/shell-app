@@ -37,7 +37,7 @@ function Header({ token }) {
     };
 
     const handleGoToCheckout = () => {
-        window.location.href = "/checkout"; // checkout host-app içinde kaldığı için navigate gerekmez
+        window.location.href = "https://checkout-app-lxfv.vercel.app/"; // checkout host-app içinde kaldığı için navigate gerekmez
     };
 
     return (

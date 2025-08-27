@@ -49,10 +49,10 @@ module.exports = (env) => {
           "checkout_app": "checkout_app@https://checkout-app-lxfv.vercel.app/remoteEntry.js"
         },
         shared: {
-          react: { singleton: true, eager: true, requiredVersion: '^18.0.0' },
-          'react-dom': { singleton: true, eager: true, requiredVersion: '^18.0.0' },
-          '@reduxjs/toolkit': { singleton: true, eager: true },
-          'react-redux': { singleton: true, eager: true }
+          react: { singleton: true, requiredVersion: '^18.0.0' },
+          'react-dom': { singleton: true, requiredVersion: '^18.0.0' },
+          '@reduxjs/toolkit': { singleton: true },
+          'react-redux': { singleton: true }
         }
       }),
       new HtmlWebpackPlugin({
